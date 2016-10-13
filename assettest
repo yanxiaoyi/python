@@ -1,0 +1,35 @@
+#author:yanxiaoyi
+#fuction descriple: unittest
+
+import  unittest
+import  random
+class TestSequenceFuncions(unittest.TestCase):
+    def setUp(self):
+        self.seq=range(10)
+        #print(self.seq)
+
+    def test_shuffle(self):
+        #random.shuffle(self.seq)
+        #self.seq.sort()
+        #print(self.seq)
+        self.assertEquals(self.seq,range(10))
+        #self.assertRaises(TypeError,random.shuffle,(1,2,3))
+
+    def test_choice(self):
+        element=random.choice(self.seq)
+        self.assertTrue(element in self.seq)
+
+    def test_error(self):
+        element=random.choice(self.seq)
+        self.assertTrue(element  not in self.seq)
+
+
+if __name__=='__main__':
+    unittest.main()
+
+
+
+
+
+
+
