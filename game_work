@@ -1,0 +1,66 @@
+# -*- encoding: UTF-8 -*-
+import  random
+class Player:
+    def __init__(self,name,blood,attack,defend,hit,dodge,crit ):
+        self.name=name
+        self.blood=blood
+        self.attack=attack
+        self.defend=defend
+        self.hit=hit
+        self.dodge=dodge
+        self.crit=crit
+    #游戏规则
+    def  Attack_behavior(self,attacked):
+        #命中标识
+        hit_flag=True
+       #暴击标识
+        crit_flag=True
+        #判断是否命中
+        if self.hit + 50 - attacked.dodge > (100 - random.randint(0, 100)):
+            hit_flag=True
+        else:
+            hit_flag=False
+        #判断是否为暴击
+        if self.crit>(100- random.randint(0,100)):
+            crit_flag=True
+            print self.name,"对",attacked.name,"造成了双倍伤害！！！"
+        else:
+            crit_flag=False
+        #计算被攻击者的血量
+        if hit_flag== True:
+            if hit_flag==True:
+                attacked.blood=attacked.blood-(self.attack*2-attacked.defend)
+            else:
+                attacked.blood = attacked.blood - (self.attack - attacked.defend)
+        else:
+            #没打中就闪避了呗~
+            print attacked.name,"闪避了",self.name,"攻击！！！"
+        return 0
+
+#初始实例化两个玩家
+player1=Player("Tom",120,40,10,40,20,20)
+player2=Player("John",150,25,20,30,50,15)
+#k用来记录回合
+k=1
+while(player1.blood>0 and player2.blood>0):
+    print "第", k, "回合："
+    player1.Attack_behavior(player2)
+    player2.Attack_behavior(player1)
+    k=k+1
+    print player1.name,"的剩余血量:",player1.blood,'\n',player2.name,"的剩余血量:",player2.blood
+    if(player1.blood<0 or player2.blood<0):
+        print "game over!!!!"
+        break
+
+
+
+
+
+
+
+
+
+
+
+
+
